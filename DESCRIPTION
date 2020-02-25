@@ -1,0 +1,24 @@
+Package: trainingrando
+Type: Package
+Title: Training material for randomisation
+Version: 0.1.0
+Author: Nicolas Dubois
+Maintainer: Nicolas Dubois <nicolas.dubois@iddi.com>
+Description: This package provide training material to understand sequential treatement assignment.
+License: GPL-3
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 7.0.2
+Imports: 
+    mvtnorm,
+    tidyr,
+    matrixcalc,
+    stats,
+    dummies,
+    tibble
+Suggests: 
+    testthat,
+    knitr,
+    rmarkdown,
+    stringr
+VignetteBuilder: knitr

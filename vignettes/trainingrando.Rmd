@@ -1,0 +1,120 @@
+---
+title: "Training Rando"
+author: "Nicolas Dubois"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+This vignette aims to present how to use the training rando package.
+
+# Design of the clinical trial
+During the design of the clinical trial, the prognostic factors are listed and the number of treatment arms is defined.
+
+## Definition of the prognotic factor(s)
+Let's imagine a study with 3 prognostic factors.
+For instance:
+
+- Age group,
+- Type of tumor and
+- Genotype. 
+
+```{r def, cache=TRUE}
+library(trainingrando)
+myprogfact <- CreatePrgFact(progfactLabel = "Age Group",progfactLevels=c("0-18 years", "19-35 years","36-60 years","> 60 years"))
+myprogfact <- AddNewPrgFact(currentProgfact=myprogfact,progfactLabel = "Type of Tumor",progfactLevels=c("A", "B","C"))
+myprogfact <- AddNewPrgFact(currentProgfact=myprogfact,progfactLabel = "Genotype.",progfactLevels=c("Genotype A", "Genotype B","Genotype C"))
+```
+
+## Definition of the treatment arms
+Let's say that the study has four treatment arms (1:1:1:1):
+
+- Placebo
+- Treatment 1
+- Treatment 2
+- Treatment 3
+
+
+```{r label=arm, cache=TRUE}
+myArms <- ArmLevelProg(data.frame("Name" = c('Placebo', 'Treatement1','Treatement2','Treatement3')))
+```
+
+# Enter patients in the study
+
+## Enter patients one by one
+
+### First patient in the study
+Let's say that a first patient has been recruited and is entring in the study. A treatment is then randomly assigned  to this first patient.
+```{r label=first, cache=TRUE}
+myRandoDataFrame <- AddFirstSubject(progfact=myprogfact,Arms=myArms)
+```
+
+### Second patient in the study
+Then a second patient enters in the study. This patient has also a his prognotics factors.
+```{r label=pat2, cache=TRUE}
+# Generate another patient
+myRandoDataFrame <- AddNextSubject(RandoDataFrame=myRandoDataFrame, progfact=myprogfact)
+```
+
+### Assign a treatment to the 2nd patient
+
+The simplest approach is to use a randomization procedure whereby each patient has an equal probability 1/N of receiving any one of the N treatments.
+
+```{r label=trtpat2, cache=TRUE}
+myRandoDataFrame02 <- PurlyRandom(Arms=myArms,RandoDataFrame=myRandoDataFrame,usubjid="Pat-0002")
+```
+
+## Enter patients in a batch
+```{r label=batch, cache=TRUE}
+myRandoDataFrame <- GenStudyTrial(npat = 25, progfact = myprogfact, Arms=myArms)
+```
+
+## Response
+### Create a response
+The function `AddAResponse` create a response which is a constant:
+
+$Y = \mu_0$
+
+```{r label=resp01, cache=TRUE}
+myResponse <- AddAResponse(RandoDataFrame=myRandoDataFrame,ResponseUnit='Weight (in kg)',Intercept=70)
+```
+
+### Add a fixed effect 
+The function `RespAddFixedEffect` adds a fixed effect.
+
+```{r label=repsfix, cache=TRUE}
+myResponse <- RespAddFixedEffect(Response=myResponse,RandoDataFrame=myRandoDataFrame,ColID=2, BetaVector=c(-1,0,0,1))
+```
+
+
+### Add a residual variability
+The function RespResidVar adds a residual variability which follows a normal distribution.
+
+$Y2 = Y1 + \epsilon$
+
+where
+
+- $\epsilon$ follows $N(0,SD_(Replicates)$
+
+```{r label=respresi, cache=TRUE}
+myResponse <- RespResidVar(Response=myResponse,SDReplicates=10)
+```
+
+### Add residuals with a specified variance covariance matrix
+
+```{r label=resvarcov, cache=TRUE}
+myVarCovMatr <- UniformCorrelation(rho=0.5,sigma2=2,nTimePoints=6)
+myespilon <- espsilonVarCov(VarCovMatr=myVarCovMatr, nTimePoints=6)
+```
+
+
+
