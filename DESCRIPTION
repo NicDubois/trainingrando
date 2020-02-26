@@ -21,4 +21,5 @@ Suggests:
     knitr,
     rmarkdown,
     stringr
+Depends: R (>= 3.5)
 VignetteBuilder: knitr
