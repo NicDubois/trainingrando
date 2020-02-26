@@ -28,7 +28,7 @@ For instance:
 - Type of tumor and
 - Genotype. 
 
-```{r def, cache=TRUE}
+```{r def, cache=FALSE}
 library(trainingrando)
 myprogfact <- CreatePrgFact(progfactLabel = "Age Group",progfactLevels=c("0-18 years", "19-35 years","36-60 years","> 60 years"))
 myprogfact <- AddNewPrgFact(currentProgfact=myprogfact,progfactLabel = "Type of Tumor",progfactLevels=c("A", "B","C"))
@@ -44,7 +44,7 @@ Let's say that the study has four treatment arms (1:1:1:1):
 - Treatment 3
 
 
-```{r label=arm, cache=TRUE}
+```{r label=arm, cache=FALSE}
 myArms <- ArmLevelProg(data.frame("Name" = c('Placebo', 'Treatement1','Treatement2','Treatement3')))
 ```
 
@@ -54,13 +54,13 @@ myArms <- ArmLevelProg(data.frame("Name" = c('Placebo', 'Treatement1','Treatemen
 
 ### First patient in the study
 Let's say that a first patient has been recruited and is entring in the study. A treatment is then randomly assigned  to this first patient.
-```{r label=first, cache=TRUE}
+```{r label=first, cache=FALSE}
 myRandoDataFrame <- AddFirstSubject(progfact=myprogfact,Arms=myArms)
 ```
 
 ### Second patient in the study
 Then a second patient enters in the study. This patient has also a his prognotics factors.
-```{r label=pat2, cache=TRUE}
+```{r label=pat2, cache=FALSE}
 # Generate another patient
 myRandoDataFrame <- AddNextSubject(RandoDataFrame=myRandoDataFrame, progfact=myprogfact)
 ```
@@ -69,12 +69,12 @@ myRandoDataFrame <- AddNextSubject(RandoDataFrame=myRandoDataFrame, progfact=myp
 
 The simplest approach is to use a randomization procedure whereby each patient has an equal probability 1/N of receiving any one of the N treatments.
 
-```{r label=trtpat2, cache=TRUE}
+```{r label=trtpat2, cache=FALSE}
 myRandoDataFrame02 <- PurlyRandom(Arms=myArms,RandoDataFrame=myRandoDataFrame,usubjid="Pat-0002")
 ```
 
 ## Enter patients in a batch
-```{r label=batch, cache=TRUE}
+```{r label=batch, cache=FALSE}
 myRandoDataFrame <- GenStudyTrial(npat = 25, progfact = myprogfact, Arms=myArms)
 ```
 
@@ -84,14 +84,14 @@ The function `AddAResponse` create a response which is a constant:
 
 $Y = \mu_0$
 
-```{r label=resp01, cache=TRUE}
+```{r label=resp01, cache=FALSE}
 myResponse <- AddAResponse(RandoDataFrame=myRandoDataFrame,ResponseUnit='Weight (in kg)',Intercept=70)
 ```
 
 ### Add a fixed effect 
 The function `RespAddFixedEffect` adds a fixed effect.
 
-```{r label=repsfix, cache=TRUE}
+```{r label=repsfix, cache=FALSE}
 myResponse <- RespAddFixedEffect(Response=myResponse,RandoDataFrame=myRandoDataFrame,ColID=2, BetaVector=c(-1,0,0,1))
 ```
 
@@ -105,13 +105,13 @@ where
 
 - $\epsilon$ follows $N(0,SD_(Replicates)$
 
-```{r label=respresi, cache=TRUE}
+```{r label=respresi, cache=FALSE}
 myResponse <- RespResidVar(Response=myResponse,SDReplicates=10)
 ```
 
 ### Add residuals with a specified variance covariance matrix
 
-```{r label=resvarcov, cache=TRUE}
+```{r label=resvarcov, cache=FALSE}
 myVarCovMatr <- UniformCorrelation(rho=0.5,sigma2=2,nTimePoints=6)
 myespilon <- espsilonVarCov(VarCovMatr=myVarCovMatr, nTimePoints=6)
 ```
