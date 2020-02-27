@@ -56,7 +56,7 @@ espsilonVarCov <- function(VarCovMatr, nTimePoints){
 #' RandomEffect
 #'
 #' @description Creation of a vector of the random effect
-#' @param myrandomeffect an independent variable which is modeled as a random effect.
+#' @param randomeffect an independent variable which is modeled as a random effect.
 #' @param VARRandoEffect The variance of the random effect
 #' @return ZGamma1
 #' @examples myZGamma <- RandomEffect(randomeffect=myRandoDataFrame$V2, VARRandoEffect=10)

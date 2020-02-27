@@ -4,13 +4,15 @@
 \alias{AddNextSubject}
 \title{AddNextSubject}
 \usage{
-AddNextSubject(RandoDataFrame, progfact, ...)
+AddNextSubject(RandoDataFrame, progfact)
 }
 \arguments{
-\item{ArmLevel}{A dataframe with ArmLevel$Name = c('TreatmentA','TreatmentB')}
+\item{RandoDataFrame}{a TrainRandoSubj object witht the randomization data}
+
+\item{progfact}{A TrainRandoProgFact object defining the prognostic factors}
 }
 \value{
-ArmLevel a dataframe with LowerBound and Upperbound for the random allocation
+RandoDataFrame a TrainRandoSubj object witht the randomization data
 }
 \description{
 AddNextSubject

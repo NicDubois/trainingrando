@@ -11,10 +11,14 @@ AddNewPrgFact(
 )
 }
 \arguments{
-\item{X}{une matrice avec les valeurs des deux échantillons.}
+\item{currentProgfact}{Une liste de classe SAPUL4012Moy2EchPair.}
+
+\item{progfactLabel}{a character string with the name of the prognostic factor.}
+
+\item{progfactLevels}{a vector of character strings with the levels of the prognostic factor.}
 }
 \value{
-Une liste de classe SAPUL4012Moy2EchPair.
+NewProgfact Une liste de classe SAPUL4012Moy2EchPair.
 }
 \description{
 This function adds a new prognostic factor in an existing TrainRandoProgFact object.

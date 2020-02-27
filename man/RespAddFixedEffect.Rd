@@ -7,14 +7,16 @@
 RespAddFixedEffect(Response, RandoDataFrame, ColID, BetaVector)
 }
 \arguments{
+\item{Response}{TrainRandoResp object with a response variable (dependent variable)}
+
+\item{RandoDataFrame}{a TrainRandoSubj object with the randomization data}
+
 \item{ColID}{index of the column of the RandoDataFrame which will be used as independant variable}
 
 \item{BetaVector}{a vector of the beta effect}
-
-\item{response}{TrainRandoResp object witht a response variable (dependent variable)}
 }
 \value{
-response TrainRandoResp object witht a response variable (dependent variable)
+response TrainRandoResp object with a response variable (dependent variable)
 }
 \description{
 RespAddFixedEffect

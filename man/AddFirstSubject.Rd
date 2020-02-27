@@ -10,9 +10,11 @@ AddFirstSubject(progfact, Arms, usubjid = "Pat-0001")
 \item{progfact}{A TrainRandoProgFact object defining the prognostic factors}
 
 \item{Arms}{A TrainRandoArm object defining the treatment arms}
+
+\item{usubjid}{the identifier of the subject (that is the id of the patient)}
 }
 \value{
-RandoDataFrame TrainRandoSubj object witht the randomization data
+RandoDataFrame a TrainRandoSubj object witht the randomization data
 }
 \description{
 AddFirstSubject

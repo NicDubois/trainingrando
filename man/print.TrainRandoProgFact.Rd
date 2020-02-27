@@ -4,10 +4,10 @@
 \alias{print.TrainRandoProgFact}
 \title{Print a TrainRandoProgFact object}
 \usage{
-\method{print}{TrainRandoProgFact}(x, ...)
+\method{print}{TrainRandoProgFact}(...)
 }
 \arguments{
-\item{x}{Un a object TrainRandoProgFact}
+\item{...}{further arguments passed to or from other methods.}
 }
 \description{
 Print a TrainRandoProgFact object

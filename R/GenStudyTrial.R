@@ -11,11 +11,11 @@
 GenStudyTrial<-function(npat = 25, progfact, Arms)
 {
   # First patient
-  myRandoDataFrame <- AddFirstSubject(progfact=myprogfact,Arms=myArms)
+  myRandoDataFrame <- AddFirstSubject(progfact=progfact,Arms=Arms)
   # Generate the npat-1 other patients
   for (i in c(2:npat)){
-    myRandoDataFrame <- AddNextSubject(RandoDataFrame=myRandoDataFrame, progfact=myprogfact)
-    myRandoDataFrame <- PurlyRandom(Arms=myArms,RandoDataFrame=myRandoDataFrame)
+    myRandoDataFrame <- AddNextSubject(RandoDataFrame=myRandoDataFrame, progfact=progfact)
+    myRandoDataFrame <- PurlyRandom(Arms=Arms,RandoDataFrame=myRandoDataFrame)
   }
 
   return(myRandoDataFrame)

@@ -7,19 +7,19 @@
 AddAResponse(RandoDataFrame, ResponseUnit = "", Intercept)
 }
 \arguments{
-\item{RandoDataFrame}{a TrainRandoSubj object witht the randomization data}
+\item{RandoDataFrame}{a TrainRandoSubj object with the randomization data}
 
 \item{ResponseUnit}{a character string with the unit of the response}
 
 \item{Intercept}{a fixed value}
 }
 \value{
-response TrainRandoResp object witht a response variable (dependent variable)
+response TrainRandoResp object with a response variable (dependent variable)
 }
 \description{
 AddAResponse
 }
 \examples{
 data("myArms","myRandoDataFrame","myprogfact")
-myResponse <- AddAResponse(RandoDataFrame=myRandoDataFrame,ResponseUnit='Weight (in kg)',Intercept=70)
+myResponse <- AddAResponse(RandoDataFrame=myRandoDataFrame, ResponseUnit='Weight (in kg)',Intercept=70)
 }

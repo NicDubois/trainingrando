@@ -19,9 +19,9 @@ CreatePrgFact <- function(progfactLabel='Prognostic factor 1', progfactLevels=c(
 
 #' Print a TrainRandoProgFact object
 #'
-#' @param x Un a object TrainRandoProgFact
+#' @inheritParams base::print
 #' @export
-print.TrainRandoProgFact <-function(x,...){
+print.TrainRandoProgFact <-function(...){
   cat("Prognostic factor(s): \n")
   for (i in c(1:length(x))){
   cat("   ", attr(x,"variable.labels")[i]," - ", length(x[[i]]),"levels: \n")
@@ -34,8 +34,9 @@ print.TrainRandoProgFact <-function(x,...){
 #' Add a new training factor in an existing TrainRandoProgFact object.
 #'
 #' @description This function adds a new prognostic factor in an existing TrainRandoProgFact object.
-#' @param X une matrice avec les valeurs des deux échantillons.
-#' @return Une liste de classe SAPUL4012Moy2EchPair.
+#' @param currentProgfact Une liste de classe SAPUL4012Moy2EchPair.
+#' @inheritParams CreatePrgFact
+#' @return NewProgfact Une liste de classe SAPUL4012Moy2EchPair.
 #' @seealso CreatePrgFact
 #' @examples
 #' myprogfact2 <- AddNewPrgFact(currentProgfact=myprogfact,progfactLabel = "Type of tumor",progfactLevels=c("A", "B","C"))

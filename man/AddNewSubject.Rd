@@ -4,10 +4,10 @@
 \alias{AddNewSubject}
 \title{AddNewSubject.}
 \usage{
-AddNewSubject(lsPrgFact, usubjid)
+AddNewSubject(progfact, usubjid)
 }
 \arguments{
-\item{lsPrgFact}{A list with the level of the prognostic factors}
+\item{progfact}{A TrainRandoProgFact object defining the prognostic factors}
 
 \item{usubjid}{the identifier of the subject (that is the id of the patient)}
 }
@@ -16,12 +16,9 @@ NewSubj , A new patient with the prognostic level randomly assigned according to
 according to independant uniform distribution.
 }
 \description{
-AddNewSubject.
+Add a new subject based on the prognostic factor and the id of the subject.
+  This function is often used inside the function AddNextSubject.
 }
 \examples{
-progfact1<-c("A","B","C")
-progfact2<-c("A","B","C")
-progfact3<-c("A","B","C","D")
-PrgFact<-list(progfact1, progfact2, progfact3)
-myNewSubj <- AddNewSubject(lsPrgFact=myprogfact,usubjid='Pat001')
+myNewSubj <- AddNewSubject(progfact=myprogfact,usubjid='Pat001')
 }

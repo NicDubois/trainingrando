@@ -29,10 +29,9 @@ ArmLevelProg <- function(ArmLevel){
   return(Arm)
 }
 #' print a TrainRandoArm object
-#'
-#' @param x Un a object TrainRandoArm
+#' @inheritParams base::print
 #' @export
-print.TrainRandoArm <-function(x,...){
+print.TrainRandoArm <-function(...){
   cat("Treatment arms and their corresponding planned proportion of subjects: \n")
   x2 <-x[,1:2]
   print(x2)

@@ -7,9 +7,9 @@
 RandomEffect(randomeffect, VARRandoEffect)
 }
 \arguments{
-\item{VARRandoEffect}{The variance of the random effect}
+\item{randomeffect}{an independent variable which is modeled as a random effect.}
 
-\item{myrandomeffect}{an independent variable which is modeled as a random effect.}
+\item{VARRandoEffect}{The variance of the random effect}
 }
 \value{
 ZGamma1

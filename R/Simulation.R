@@ -1,12 +1,12 @@
 #' AddAResponse
 #'
-#' @param RandoDataFrame a TrainRandoSubj object witht the randomization data
+#' @param RandoDataFrame a TrainRandoSubj object with the randomization data
 #' @param ResponseUnit a character string with the unit of the response
 #' @param Intercept a fixed value
-#' @return response TrainRandoResp object witht a response variable (dependent variable)
+#' @return response TrainRandoResp object with a response variable (dependent variable)
 #' @examples
 #' data("myArms","myRandoDataFrame","myprogfact")
-#' myResponse <- AddAResponse(RandoDataFrame=myRandoDataFrame,ResponseUnit='Weight (in kg)',Intercept=70)
+#' myResponse <- AddAResponse(RandoDataFrame=myRandoDataFrame, ResponseUnit='Weight (in kg)',Intercept=70)
 #' @export
 AddAResponse <- function(RandoDataFrame,ResponseUnit='',Intercept)
 {
@@ -19,9 +19,9 @@ return(response)
 
 #' RespResidVar
 #'
-#' @param response TrainRandoResp object witht a response variable (dependent variable)
+#' @param Response TrainRandoResp object with a response variable (dependent variable)
 #' @param SDReplicates a character string with the unit of the response
-#' @return response TrainRandoResp object witht a response variable (dependent variable)
+#' @return response TrainRandoResp object with a response variable (dependent variable)
 #' @examples
 #' data("myResponse")
 #' myResponse <- RespResidVar(Response=myResponse,SDReplicates=10)
@@ -40,17 +40,18 @@ RespResidVar <- function(Response, SDReplicates)
 
 #' RespAddFixedEffect
 #'
-#' @param response TrainRandoResp object witht a response variable (dependent variable)
 #' @param BetaVector a vector of the beta effect
 #' @param ColID index of the column of the RandoDataFrame which will be used as independant variable
-#' @return response TrainRandoResp object witht a response variable (dependent variable)
+#' @inheritParams AddAResponse
+#' @inheritParams RespResidVar
+#' @return response TrainRandoResp object with a response variable (dependent variable)
 #' @examples
 #' data("myResponse","myRandoDataFrame")
 #' myResponse <- RespAddFixedEffect(Response=trainingrando::myResponse,RandoDataFrame=trainingrando::myRandoDataFrame,ColID=2, BetaVector=c(-1,0,0,1))
 #' @export
 RespAddFixedEffect <- function(Response, RandoDataFrame,ColID, BetaVector)
 {
-  XVector<-myRandoDataFrame[,ColID]
+  XVector<-RandoDataFrame[,ColID]
   xV1 <-DicotomizeVector(XVector)
   Response$Values <- Response$Values + xV1 %*% BetaVector
 

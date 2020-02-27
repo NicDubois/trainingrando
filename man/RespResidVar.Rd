@@ -7,12 +7,12 @@
 RespResidVar(Response, SDReplicates)
 }
 \arguments{
-\item{SDReplicates}{a character string with the unit of the response}
+\item{Response}{TrainRandoResp object with a response variable (dependent variable)}
 
-\item{response}{TrainRandoResp object witht a response variable (dependent variable)}
+\item{SDReplicates}{a character string with the unit of the response}
 }
 \value{
-response TrainRandoResp object witht a response variable (dependent variable)
+response TrainRandoResp object with a response variable (dependent variable)
 }
 \description{
 RespResidVar
