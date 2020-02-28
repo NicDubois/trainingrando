@@ -113,7 +113,7 @@ myResponse <- RespResidVar(Response=myResponse,SDReplicates=10)
 
 ```{r label=resvarcov, cache=FALSE}
 myVarCovMatr <- UniformCorrelation(rho=0.5,sigma2=2,nTimePoints=6)
-myepsilon <- espsilonVarCov(VarCovMatr=myVarCovMatr, nTimePoints=6)
+myepsilon <- espsilonVarCov(VarCovMatr=myVarCovMatr, nTimePoints=6, RandoDataFrame=myRandoDataFrame)
 ```
 
 

@@ -35,11 +35,12 @@ UniformCorrelation <- function(rho,sigma2,nTimePoints)
 #'
 #' @param VarCovMatr a VarCovMatr object which is a squared matrix defining the covariance structure
 #' @param nTimePoints the number of timepoints
+#' @inheritParams AddAResponse
 #' @return epsilon
-#' @examples myespilon <- espsilonVarCov(VarCovMatr=myVarCovMatr, nTimePoints=6)
+#' @examples myespilon <- espsilonVarCov(VarCovMatr=myVarCovMatr,RandoDataFrame=myRandoDataFrame, nTimePoints=6)
 #' @import mvtnorm tidyr
 #' @export
-espsilonVarCov <- function(VarCovMatr, nTimePoints){
+espsilonVarCov <- function(VarCovMatr, nTimePoints,RandoDataFrame){
   # Creation of the epsilon vector
   Exp <- rep(x=0,times=nTimePoints)
 
@@ -47,9 +48,10 @@ espsilonVarCov <- function(VarCovMatr, nTimePoints){
   dimnames(rmvnormMatrix)[[2]] <- paste("TimePoint_",seq(1,nTimePoints),sep='')
 
   rmvnormTibbles<- tibble::as_tibble(rmvnormMatrix)
-  rmvnormTibbles$usubjid <- myRandoDataFrame$usubjid
+  rmvnormTibbles$usubjid <- RandoDataFrame$usubjid
 
-  epsilon <- tidyr::gather(rmvnormTibbles,`TimePoint_1` ,`TimePoint_2`,`TimePoint_3`, `TimePoint_4`, `TimePoint_5`,`TimePoint_6`, key="TimePoint",value="Residuals")
+   epsilon <-rmvnormTibbles %>% tidyr::pivot_longer(-usubjid,names_to = "TimePoint", values_to = "Residuals")
+
   return(epsilon)
 }
 
