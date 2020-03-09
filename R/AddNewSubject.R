@@ -64,7 +64,7 @@ AddNewSubject <- function(progfact,usubjid) {
 #'
 #' @inheritParams base::print
 #' @export
-print.TrainRandoSubj <-function(...){
+print.TrainRandoSubj <-function(x,...){
   ncol <- dim(x)[2]
   nProgFactArm <- ncol-1
   y <- x

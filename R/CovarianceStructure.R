@@ -35,16 +35,17 @@ UniformCorrelation <- function(rho,sigma2,nTimePoints)
 #'
 #' @param VarCovMatr a VarCovMatr object which is a squared matrix defining the covariance structure
 #' @param nTimePoints the number of timepoints
+#' @param replicates the number of timepoints
 #' @inheritParams AddAResponse
 #' @return epsilon
-#' @examples myespilon <- espsilonVarCov(VarCovMatr=myVarCovMatr,RandoDataFrame=myRandoDataFrame, nTimePoints=6)
+#' @examples myespilon <- espsilonVarCov(VarCovMatr=myVarCovMatr,RandoDataFrame=myRandoDataFrame, nTimePoints=6, replicates=1)
 #' @import mvtnorm tidyr
 #' @export
-espsilonVarCov <- function(VarCovMatr, nTimePoints,RandoDataFrame){
+espsilonVarCov <- function(VarCovMatr, nTimePoints,RandoDataFrame,replicates=1){
   # Creation of the epsilon vector
   Exp <- rep(x=0,times=nTimePoints)
-
-  rmvnormMatrix <- mvtnorm::rmvnorm(n=50, mean=Exp, sigma=VarCovMatr)
+  nrmv <- dim(myRandoDataFrame)[1] * replicates
+  rmvnormMatrix <- mvtnorm::rmvnorm(n=nrmv, mean=Exp, sigma=VarCovMatr)
   dimnames(rmvnormMatrix)[[2]] <- paste("TimePoint_",seq(1,nTimePoints),sep='')
 
   rmvnormTibbles<- tibble::as_tibble(rmvnormMatrix)

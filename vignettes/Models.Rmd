@@ -1,0 +1,80 @@
+---
+title: "Models"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Models}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(trainingrando)
+```
+
+# 1. Generalized linear model
+## 1.1 Normal distribution
+### 1.1.1 Fixed effect only:
+$$E[Y] = X\beta $$
+Where:
+
+* $\mathbf{X}$ is called the fixed-effect design matrix.
+
+```{r, echo=FALSE}
+print(myRandoDataFrame[,c(2,3)])
+```
+
+* $\beta= [\beta_0, \beta_{age}, \beta_{TypeofTumor}]$
+
+### 1.1.2 Linear mixed model 
+
+$$ \mathbf{Y} = \mathbf{X\beta} + \mathbf{Z\gamma} + \mathbf{\epsilon} $$
+
+with 
+
+* $\mathbf{\gamma} \sim N(0,G)$
+
+* $\mathbf{\epsilon} \sim N(0,R)$
+
+* $ cov[\mathbf{\gamma},\mathbf{epsilon}] = \mathbf{0}$
+
+Note: Matrix $\mathbf{G}$ is a covariance matrix for random errors and $\mathbf{R}$ is the covariance matrix for the random errors.
+
+$\mathbf{Y}|\mathbf{\gamma} \sim N(\mathbf{X\beta}+\mathbf{Z\gamma},\mathbf{R})$
+$\mathbf{Y} \sim N(\mathbf{X\beta}+\mathbf{Z\gamma},\mathbf{V})$ with $\mathbf{V} = \mathbf{ZGZ'} + \mathbf{R}$
+$\mathbf{Z}$ is called the random-effect design matrix.
+$\mathbf{X}$ is called the fixed-effect design matrix.
+
+\begin{eqnarray}
+X &  & \mathrm{N}(0,1)\\
+Y & \sim & \chi^2_{n-p}\\
+R & \equiv & X/Y \sim t_{n-p}
+\end{eqnarray}
+
+#### with repeated measurments 
+#### with random slope
+
+
+## 1.2 Binomal distribution
+### Logistic regressions
+$$ log(\frac{p}{1-p}) = X\beta $$
+# 2. Survival models
+## 2.1 Cox proportional hazards model
+$$ \lambda(t|X_{i}) = \lambda_0(t) * exp(\beta_1 X_{i1} + ... + \beta_p X_{ip})$$
+with 
+
+* $X_i = {X_{i1},...X_{ip}}$ be the realized values of covariates for subject i.
+
+This expression gives the hazard fuction at time $ti$ for subject $i$ with covariate vector (explanatory variables) $Xi$.
+
+The hazard function is 
+$$ \lambda(t) = \frac{f(t)}{1-F(t)} $$
+Where $f(t)$ is the time to (first) failure distribution (i.e. the failure density function).
+
+Note: Although the failure rate, $\lambda (t)$, is often thought of as the probability that a failure occurs in a specified interval given no failure before time $t$ , it is not actually a probability because it can exceed 1. Erroneous expression of the failure rate in % could result in incorrect perception of the measure, especially if it would be measured from repairable systems and multiple systems with non-constant failure rates or different operation times. It can be defined with the aid of the reliability function, also called the survival function, $R(t)=1−F(t)$, the probability of no failure before time $t$. 

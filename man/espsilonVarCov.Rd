@@ -4,7 +4,7 @@
 \alias{espsilonVarCov}
 \title{espsilonVarCov}
 \usage{
-espsilonVarCov(VarCovMatr, nTimePoints, RandoDataFrame)
+espsilonVarCov(VarCovMatr, nTimePoints, RandoDataFrame, replicates = 1)
 }
 \arguments{
 \item{VarCovMatr}{a VarCovMatr object which is a squared matrix defining the covariance structure}
@@ -12,6 +12,8 @@ espsilonVarCov(VarCovMatr, nTimePoints, RandoDataFrame)
 \item{nTimePoints}{the number of timepoints}
 
 \item{RandoDataFrame}{a TrainRandoSubj object with the randomization data}
+
+\item{replicates}{the number of timepoints}
 }
 \value{
 epsilon
@@ -20,5 +22,5 @@ epsilon
 espsilonVarCov
 }
 \examples{
-myespilon <- espsilonVarCov(VarCovMatr=myVarCovMatr,RandoDataFrame=myRandoDataFrame, nTimePoints=6)
+myespilon <- espsilonVarCov(VarCovMatr=myVarCovMatr,RandoDataFrame=myRandoDataFrame, nTimePoints=6, replicates=1)
 }

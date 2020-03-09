@@ -1,17 +1,33 @@
 #' AddAResponse
 #'
 #' @param RandoDataFrame a TrainRandoSubj object with the randomization data
+#' @param nobs the number of observations in the dataset by default
+#'  the number of rows in RandoDataFrame
 #' @param ResponseUnit a character string with the unit of the response
-#' @param Intercept a fixed value
-#' @return response TrainRandoResp object with a response variable (dependent variable)
+#' @param RespValues can be a fixed value intercept which will be repeated nobs times
+#' or a numerical vector of the same lenght than nobs.
+#' @return response TrainRandoResp object with a response variable
+#'  (dependent variable)
 #' @examples
 #' data("myArms","myRandoDataFrame","myprogfact")
-#' myResponse <- AddAResponse(RandoDataFrame=myRandoDataFrame, ResponseUnit='Weight (in kg)',Intercept=70)
+#' myResponse <- AddAResponse(RandoDataFrame=myRandoDataFrame, ResponseUnit='Weight (in kg)',RespValues=70)
 #' @export
-AddAResponse <- function(RandoDataFrame,ResponseUnit='',Intercept)
+#'
+AddAResponse <- function(RandoDataFrame, nobs=NA, ResponseUnit='', RespValues)
 {
-nobs <- dim(RandoDataFrame)[1]
-responseValues <- rep(Intercept,times=nobs)
+  if(is.na(nobs)){
+      nobs <- dim(RandoDataFrame)[1]
+  }
+  if(length(RespValues)==1){
+    responseValues <- rep(RespValues,times=nobs)
+  }
+  else if(length(RespValues)==nobs){
+    responseValues <- RespValues
+  }
+  else {
+    stop(paste("RespValues should have a length of either 1 or equal to nobs (Here length(RespValue)=",length(RespValue),")",sep=''))
+  }
+
 response <- list(Values=responseValues,ResponseUnit=ResponseUnit,DistributionOfError='',Model='Y = \n mu0',ModelWith='With \n')
 class(response) <- c("TrainRandoResp","list")
 return(response)

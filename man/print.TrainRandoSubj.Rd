@@ -4,9 +4,11 @@
 \alias{print.TrainRandoSubj}
 \title{Print a TrainRandoSubj object}
 \usage{
-\method{print}{TrainRandoSubj}(...)
+\method{print}{TrainRandoSubj}(x, ...)
 }
 \arguments{
+\item{x}{an object used to select a method.}
+
 \item{...}{further arguments passed to or from other methods.}
 }
 \description{

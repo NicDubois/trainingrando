@@ -85,7 +85,7 @@ The function `AddAResponse` create a response which is a constant:
 $Y = \mu_0$
 
 ```{r label=resp01, cache=FALSE}
-myResponse <- AddAResponse(RandoDataFrame=myRandoDataFrame,ResponseUnit='Weight (in kg)',Intercept=70)
+myResponse <- AddAResponse(RandoDataFrame=myRandoDataFrame,ResponseUnit='Weight (in kg)',RespValues=70)
 ```
 
 ### Add a fixed effect 

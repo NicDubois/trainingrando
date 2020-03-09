@@ -4,22 +4,27 @@
 \alias{AddAResponse}
 \title{AddAResponse}
 \usage{
-AddAResponse(RandoDataFrame, ResponseUnit = "", Intercept)
+AddAResponse(RandoDataFrame, nobs = NA, ResponseUnit = "", RespValues)
 }
 \arguments{
 \item{RandoDataFrame}{a TrainRandoSubj object with the randomization data}
 
+\item{nobs}{the number of observations in the dataset by default
+the number of rows in RandoDataFrame}
+
 \item{ResponseUnit}{a character string with the unit of the response}
 
-\item{Intercept}{a fixed value}
+\item{RespValues}{can be a fixed value intercept which will be repeated nobs times
+or a numerical vector of the same lenght than nobs.}
 }
 \value{
-response TrainRandoResp object with a response variable (dependent variable)
+response TrainRandoResp object with a response variable
+ (dependent variable)
 }
 \description{
 AddAResponse
 }
 \examples{
 data("myArms","myRandoDataFrame","myprogfact")
-myResponse <- AddAResponse(RandoDataFrame=myRandoDataFrame, ResponseUnit='Weight (in kg)',Intercept=70)
+myResponse <- AddAResponse(RandoDataFrame=myRandoDataFrame, ResponseUnit='Weight (in kg)',RespValues=70)
 }
